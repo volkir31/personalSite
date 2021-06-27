@@ -19,7 +19,7 @@ class DB1
         $this->password = $login;
     }
 
-    public function connect()
+    public function connect(): DB1
     {
         $this->dbh = new PDO('mysql:localhost;dbname=' . $this->dbname, $this->login, $this->password);
         return $this;
@@ -30,5 +30,10 @@ class DB1
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function query(string $sql, array $data){
+        $sth = $this->dbh->prepare($sql);
+        return $sth->execute($data);
     }
 }

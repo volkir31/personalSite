@@ -5,23 +5,13 @@ namespace PhotoGallery;
 
 class Photo
 {
-    protected string $path;
     protected string $name;
     protected string $temporaryPath;
 
-    public function __construct(string $path, string $name, string $temporaryPath )
+    public function __construct(string $name, string $temporaryPath )
     {
-        $this->path = $path;
         $this->name = $name;
         $this->temporaryPath = $temporaryPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return $this->path;
     }
 
     /**
