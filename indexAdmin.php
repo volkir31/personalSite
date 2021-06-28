@@ -1,7 +1,14 @@
 <?php
-echo "<link rel='stylesheet' href='/templates/style.css'>";
 require __DIR__ . '/autoload.php';
-require __DIR__ . '/templates/admin.php';
+
+use GuestBook\Book;
+use View\View;
+
+if (!\Login\Login::verifyKey()) {
+    header('location: /indexLogin.php');
+}
+echo "<link rel='stylesheet' href='/templates/styleAdmin.css'>";
+require __DIR__ . '/autoload.php';
 
 $photosFromUser = [];
 $countPhotos = 0;
@@ -21,9 +28,20 @@ for ($i = 0; $i < $countPhotos; $i++) {
 }
 
 $about = [];
-if (isset($_POST) && !empty($_POST)) {
+if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['about']) && !empty($_POST['about'])) {
     $about = $_POST;
     $db = new \About\About($about['name'], $about['about']);
     $db->updateAbout();
 }
+
+$view = new View();
+$book = new Book();
+
+$post = $_POST;
+if (isset($post['id']) && !empty($post['id'])) {
+    $id = (int)$post['id'];
+    $book->removeRecord($id);
+}
+
+$view->display('/../templates/admin.php');
 

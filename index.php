@@ -1,12 +1,17 @@
 <?php
-
+echo "<link rel='stylesheet' href='/templates/style.css'>";
 require __DIR__ . '/autoload.php';
 
 //$a = \Models\DB::getInstance('nineth', 'root', 'root');
 //
 //$data = \Models\DB::execute('SELECT * FROM nineth.guestbook');
-$a = new \Models\DB1('nineth', 'root', 'root');
+$view = new \View\View();
+$book = new \GuestBook\Book();
 
-$data = $a->connect()->execute('SELECT * FROM nineth.guestbook');
+$record = $_POST;
+if (isset($record['author']) && !empty($record['author']) && isset($record['text']) && !empty($record['text'])) {
+    $rec = new \GuestBook\Record($record['text'], $record['author']);
+    $book->addRecord($rec);
+}
 
-var_dump($data);
+$view->display('/../templates/index.php');

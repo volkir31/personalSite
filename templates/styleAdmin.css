@@ -1,5 +1,7 @@
-img{
-    height: 300px;
+.about{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
 }
 ul{
     padding: 0;

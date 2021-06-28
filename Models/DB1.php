@@ -32,8 +32,17 @@ class DB1
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function query(string $sql, array $data){
+    public function query(string $sql, array $data)
+    {
         $sth = $this->dbh->prepare($sql);
         return $sth->execute($data);
+    }
+
+    public function getData(string $db): array
+    {
+        if ('about' === $db || 'guestbook' === $db || 'photos' === $db) {
+            return $this->connect()->execute("SELECT * FROM nineth.$db");
+        }
+        return [];
     }
 }

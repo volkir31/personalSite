@@ -14,6 +14,9 @@ class Photos
         $this->path = $path;
     }
 
+    /**
+     * @param Photo $photo
+     */
     public function addPhoto(Photo $photo)
     {
         $name = $photo->getName();
@@ -23,5 +26,14 @@ class Photos
 
         $db = new DB1('nineth', 'root', 'root');
         $db->connect()->query("INSERT INTO nineth.photos (path, name) VALUES (?, ?)", $data);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPhotos(): array
+    {
+        $db = new DB1('nineth', 'root', 'root');
+        return $db->getData('photos');
     }
 }
