@@ -19,25 +19,45 @@ class DB1
         $this->password = $login;
     }
 
+    /**
+     * Get connect with database
+     * @return $this
+     */
     public function connect(): DB1
     {
         $this->dbh = new PDO('mysql:localhost;dbname=' . $this->dbname, $this->login, $this->password);
         return $this;
     }
 
-    public function execute(string $sql)
+    /**
+     * Execute SQL request without params
+     * @param string $sql
+     * @return array
+     */
+    public function execute(string $sql): array
     {
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function query(string $sql, array $data)
+    /**
+     * Execute SQL request with params
+     * @param string $sql
+     * @param array $data
+     * @return array
+     */
+    public function query(string $sql, array $data): array
     {
         $sth = $this->dbh->prepare($sql);
         return $sth->execute($data);
     }
 
+    /**
+     * Get data from table whose name is passed as an argument
+     * @param string $db
+     * @return array
+     */
     public function getData(string $db): array
     {
         if ('about' === $db || 'guestbook' === $db || 'photos' === $db) {

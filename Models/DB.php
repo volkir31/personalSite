@@ -17,6 +17,12 @@ class DB
         throw new Exception("Can't clone a singleton");
     }
 
+    /**
+     * @param string $dbname
+     * @param string $login
+     * @param string $password
+     * @return PDO
+     */
     public static function getInstance(string $dbname, string $login, string $password): PDO
     {
         if (!isset(self::$connect['connect'])) {
@@ -26,7 +32,11 @@ class DB
         return self::$connect['connect'];
     }
 
-    public static function execute(string $sql)
+    /**
+     * @param string $sql
+     * @return array
+     */
+    public static function execute(string $sql): array
     {
         $sth = self::$connect['connect']->prepare($sql);
         $sth->execute();

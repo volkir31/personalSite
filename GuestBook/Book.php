@@ -7,6 +7,10 @@ use Models\DB1;
 
 class Book
 {
+    /**
+     * Add new record in guest book
+     * @param Record $record
+     */
     public function addRecord(Record $record): void
     {
         $data = [$record->getAuthor(), $record->getMessage()];
@@ -15,6 +19,7 @@ class Book
     }
 
     /**
+     * Return all records from database
      * @return array
      */
     public static function getData(): array
@@ -23,6 +28,10 @@ class Book
         return $db->getData('guestbook');
     }
 
+    /**
+     * Remove record by id from guest book
+     * @param string $id
+     */
     public function removeRecord(string $id)
     {
         $db = new DB1('nineth', 'root', 'root');

@@ -15,6 +15,7 @@ class Photos
     }
 
     /**
+     * Add photo in folder and create recording in database
      * @param Photo $photo
      */
     public function addPhoto(Photo $photo)
@@ -29,6 +30,7 @@ class Photos
     }
 
     /**
+     * Get photos from database
      * @return array
      */
     public static function getPhotos(): array

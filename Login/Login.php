@@ -39,12 +39,16 @@ class Login
         return md5($this->login . $this->password);
     }
 
-    public static function verifyKey():bool
+    /**
+     * Verify secret key from cookie and password from database
+     * @return bool
+     */
+    public static function verifyKey(): bool
     {
         $key = $_COOKIE;
         $db = new DB1('nineth', 'root', 'root');
         $password = $db->connect()->execute('SELECT * FROM nineth.admin')['password'];
-        if(isset($key['secretkey']) && $password === $key['secretkey']){
+        if (isset($key['secretkey']) && $password === $key['secretkey']) {
             return true;
         }
         return false;
