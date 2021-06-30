@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use Exception;
 use PDO;
 
 class DB1
@@ -12,11 +13,17 @@ class DB1
     protected object $dbh;
 
 
+    /**
+     * @throws Exception
+     */
     public function __construct(string $dbname, string $login, string $password)
     {
-        $this->dbname = $dbname;
-        $this->login = $login;
-        $this->password = $password;
+        if(!empty($dbname) && !empty($login)){
+            $this->dbname = $dbname;
+            $this->login = $login;
+            $this->password = $password;
+        }
+        throw new \Exception('dbname and login cant be empty');
     }
 
     /**

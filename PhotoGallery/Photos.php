@@ -3,6 +3,7 @@
 namespace PhotoGallery;
 
 
+use Exception;
 use Models\DB1;
 
 class Photos
@@ -17,6 +18,7 @@ class Photos
     /**
      * Add photo in folder and create recording in database
      * @param Photo $photo
+     * @throws Exception
      */
     public function addPhoto(Photo $photo)
     {
@@ -25,13 +27,15 @@ class Photos
 
         move_uploaded_file($photo->getTemporaryPath(), __DIR__ . '/../' . $this->path . $name);
 
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         $db->connect()->query("INSERT INTO nineth.photos (path, name) VALUES (?, ?)", $data);
     }
 
     /**
      * Get photos from database
      * @return array
+     * @throws Exception
      */
     public static function getPhotos(): array
     {

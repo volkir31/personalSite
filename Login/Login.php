@@ -4,6 +4,7 @@
 namespace Login;
 
 
+use Exception;
 use Models\DB1;
 
 class Login
@@ -19,6 +20,7 @@ class Login
 
     /**
      * @return bool
+     * @throws Exception
      */
     public function verify(): bool
     {
@@ -43,6 +45,7 @@ class Login
     /**
      * Verify secret key from cookie and password from database
      * @return bool
+     * @throws Exception
      */
     public static function verifyKey(): bool
     {

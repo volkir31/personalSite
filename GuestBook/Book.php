@@ -3,6 +3,7 @@
 namespace GuestBook;
 
 
+use Exception;
 use Models\DB1;
 
 class Book
@@ -22,6 +23,7 @@ class Book
     /**
      * Return all records from database
      * @return array
+     * @throws Exception
      */
     public static function getData(): array
     {
@@ -33,10 +35,12 @@ class Book
     /**
      * Remove record by id from guest book
      * @param string $id
+     * @throws Exception
      */
     public function removeRecord(string $id)
     {
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         $db->connect()->query('DELETE FROM nineth.guestbook WHERE id = ?', [$id]);
     }
 }

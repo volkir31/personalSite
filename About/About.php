@@ -4,6 +4,7 @@
 namespace About;
 
 
+use Exception;
 use Models\DB1;
 
 class About
@@ -17,6 +18,9 @@ class About
         $this->about = $about;
     }
 
+    /**
+     * @throws Exception
+     */
     public function updateAbout()
     {
         $config = (require __DIR__ . '/../config.php')['db'];
@@ -29,6 +33,7 @@ class About
 
     /**
      * @return array
+     * @throws Exception
      */
     public static function getAbout(): array
     {
