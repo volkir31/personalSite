@@ -35,7 +35,8 @@ class Photos
      */
     public static function getPhotos(): array
     {
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         return $db->getData('photos');
     }
 }

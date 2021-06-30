@@ -25,7 +25,6 @@ class View
 
     /**
      * @param string $template
-     * @param string $dbname
      */
     public function display(string $template): void
     {

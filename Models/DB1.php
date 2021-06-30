@@ -16,7 +16,7 @@ class DB1
     {
         $this->dbname = $dbname;
         $this->login = $login;
-        $this->password = $login;
+        $this->password = $password;
     }
 
     /**
@@ -45,9 +45,9 @@ class DB1
      * Execute SQL request with params
      * @param string $sql
      * @param array $data
-     * @return array
+     * @return bool
      */
-    public function query(string $sql, array $data): array
+    public function query(string $sql, array $data): bool
     {
         $sth = $this->dbh->prepare($sql);
         return $sth->execute($data);

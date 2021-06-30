@@ -14,7 +14,8 @@ class Book
     public function addRecord(Record $record): void
     {
         $data = [$record->getAuthor(), $record->getMessage()];
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         $db->connect()->query('INSERT INTO nineth.guestbook (author, text) VALUES (?,?)', $data);
     }
 
@@ -24,7 +25,8 @@ class Book
      */
     public static function getData(): array
     {
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         return $db->getData('guestbook');
     }
 

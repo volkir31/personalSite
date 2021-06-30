@@ -22,7 +22,8 @@ class Login
      */
     public function verify(): bool
     {
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         $adminData = $db->connect()->execute('SELECT * FROM nineth.admin');
         $password = md5($this->login . $this->password);
         if ($password === $adminData[0]['password'] && $adminData[0]['login'] === $this->login) {
@@ -46,8 +47,9 @@ class Login
     public static function verifyKey(): bool
     {
         $key = $_COOKIE;
-        $db = new DB1('nineth', 'root', 'root');
-        $password = $db->connect()->execute('SELECT * FROM nineth.admin')['password'];
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
+        $password = $db->connect()->execute('SELECT * FROM nineth.admin')[0]['password'];
         if (isset($key['secretkey']) && $password === $key['secretkey']) {
             return true;
         }

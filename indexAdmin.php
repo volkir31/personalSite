@@ -5,10 +5,9 @@ use GuestBook\Book;
 use View\View;
 
 if (!\Login\Login::verifyKey()) {
-    header('location: /indexLogin.php');
+    header('location: indexLogin.php');
 }
 echo "<link rel='stylesheet' href='/templates/styleAdmin.css'>";
-require __DIR__ . '/autoload.php';
 
 $photosFromUser = [];
 $countPhotos = 0;

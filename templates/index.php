@@ -21,7 +21,7 @@
 <div class="gallery">
     <?php
     foreach ($photos as $photo) {
-        $path = '\\..' . str_replace('/', '\\', $photo['path']) . $photo['name'];
+        $path =  str_replace('/', '\\', $photo['path']) . $photo['name'];
         ?>
         <img src="<?= $path ?>" alt="">
         <?php

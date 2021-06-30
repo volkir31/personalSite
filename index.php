@@ -1,10 +1,7 @@
 <?php
-echo "<link rel='stylesheet' href='/templates/style.css'>";
+echo "<link rel='stylesheet' href='templates/style.css'>";
 require __DIR__ . '/autoload.php';
 
-//$a = \Models\DB::getInstance('nineth', 'root', 'root');
-//
-//$data = \Models\DB::execute('SELECT * FROM nineth.guestbook');
 $view = new \View\View();
 $book = new \GuestBook\Book();
 

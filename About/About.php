@@ -19,7 +19,8 @@ class About
 
     public function updateAbout()
     {
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         $name = $this->name;
         $about = $this->about;
         $db->connect()->query("UPDATE nineth.about SET name = ?",[$name]);
@@ -31,7 +32,8 @@ class About
      */
     public static function getAbout(): array
     {
-        $db = new DB1('nineth', 'root', 'root');
+        $config = (require __DIR__ . '/../config.php')['db'];
+        $db = new DB1($config['dbname'], $config['login'], $config['password']);
         return $db->getData('about');
     }
 }
