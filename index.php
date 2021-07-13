@@ -8,7 +8,14 @@ $book = new \GuestBook\Book();
 $record = $_POST;
 if (isset($record['author']) && !empty($record['author']) && isset($record['text']) && !empty($record['text'])) {
     $rec = new \GuestBook\Record($record['text'], $record['author']);
-    $book->addRecord($rec);
+    try {
+        $book->addRecord($rec);
+    } catch (Exception $e) {
+    }
 }
 
-$view->display('/../templates/index.php');
+try {
+    $view->display('/../templates/index.php');
+} catch (Exception $e) {
+    echo $e->getMessage();
+}

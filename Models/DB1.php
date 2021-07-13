@@ -18,12 +18,14 @@ class DB1
      */
     public function __construct(string $dbname, string $login, string $password)
     {
-        if(!empty($dbname) && !empty($login)){
+        if (!empty($dbname) && !empty($login)) {
             $this->dbname = $dbname;
             $this->login = $login;
             $this->password = $password;
         }
-        throw new \Exception('dbname and login cant be empty');
+        if (empty($dbname) && empty($login)) {
+            throw new \Exception('dbname and login cant be empty');
+        }
     }
 
     /**

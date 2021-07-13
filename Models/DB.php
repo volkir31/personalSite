@@ -7,7 +7,7 @@ use PDO;
 
 class DB
 {
-    private static array $connect = [];
+    private static object $connect;
 
     /**
      * @throws Exception Can't clone a singleton
@@ -25,11 +25,11 @@ class DB
      */
     public static function getInstance(string $dbname, string $login, string $password): PDO
     {
-        if (!isset(self::$connect['connect'])) {
-            self::$connect['connect'] = new PDO("mysql:localhost;dbname=$dbname", $login, $password);;
+        if (empty(self::$connect)) {
+            self::$connect = new PDO("mysql:localhost;dbname=$dbname", $login, $password);;
         }
 
-        return self::$connect['connect'];
+        return self::$connect;
     }
 
     /**
@@ -38,7 +38,15 @@ class DB
      */
     public static function execute(string $sql): array
     {
-        $sth = self::$connect['connect']->prepare($sql);
+        $sth = self::$connect->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getData(string $table): array
+    {
+        $sql = 'SELECT * FROM ' . $table;
+        $sth = self::$connect->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }

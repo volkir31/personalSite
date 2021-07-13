@@ -11,6 +11,7 @@ class Book
     /**
      * Add new record in guest book
      * @param Record $record
+     * @throws Exception
      */
     public function addRecord(Record $record): void
     {

@@ -5,6 +5,7 @@ namespace View;
 
 
 use About\About;
+use Exception;
 use GuestBook\Book;
 use Models\DB1;
 use PhotoGallery\Photos;
@@ -25,6 +26,7 @@ class View
 
     /**
      * @param string $template
+     * @throws Exception
      */
     public function display(string $template): void
     {
@@ -34,7 +36,7 @@ class View
         if (!empty($records) || !empty($photos) || !empty($about)) {
             include __DIR__ . $template;
         } else {
-            echo 'Empty';
+            throw new Exception('empty');
         }
     }
 }

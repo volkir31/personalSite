@@ -4,6 +4,6 @@ return [
     'db' => [
         'dbname' => 'nineth',
         'login' => 'root',
-        'password' => 'mysqlPAS!root'
+        'password' => 'Linux@1991V4'
     ]
 ];
